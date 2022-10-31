@@ -1,0 +1,12 @@
+{
+    "name": "my_node_js_app",
+    "version": "1.0.0",
+    "description": "",
+    "author": "Igor Philonenko",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js"
+    },
+    "dependencies": {
+    }
+  }
