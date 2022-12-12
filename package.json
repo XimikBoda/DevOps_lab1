@@ -1,12 +1,25 @@
 {
-    "name": "my_node_js_app",
-    "version": "1.0.0",
-    "description": "",
-    "author": "Igor Philonenko",
-    "main": "app.js",
-    "scripts": {
-      "start": "node app.js"
-    },
-    "dependencies": {
-    }
+  "name": "my_node_js_app",
+  "version": "1.0.0",
+  "description": "Made by Philonenko Igor, IK-01",
+  "author": "Igor Philonenko",
+  "main": "app.js",
+  "scripts": {
+    "lint:js": "eslint ./*.js",
+    "lint": "npm run lint:js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XimikBoda/DevOps_lab1.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XimikBoda/DevOps_lab1/issues"
+  },
+  "homepage": "https://github.com/XimikBoda/DevOps_lab1#readme",
+  "devDependencies": {
+    "eslint": "8.29.0"
   }
+}
