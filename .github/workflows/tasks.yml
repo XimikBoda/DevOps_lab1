@@ -1,4 +1,4 @@
-name: Lint, build docker and push
+name: Lint, build docker and deploy
 
 on: 
   pull_request:
@@ -30,10 +30,42 @@ jobs:
 
   build: 
     needs: linting
+    name: Docker build
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v1
         - name: Build the latest Docker image
           run: docker build . --file Dockerfile --tag ximikboda/myapp:latest
+
+        - name: Save docker docker to temp directory
+          run: mkdir -p /tmp/share
+          run: docker save ximikboda/myapp:latest > /tmp/share/docker-image.tar
+
+        - name: Temporarily save Docker image
+          uses: actions/upload-artifact@v2
+          with:
+            name: docker-artifact
+            path: /tmp/share/
+            retention-days: 1
+
+  deploy:
+    needs: build
+    name: Docker deploy 
+    steps:
+      - name: Retrieve saved Docker image
+        uses: actions/download-artifact@v2
+        with:
+          name: docker-artifact
+          path: /tmp/share/
+
+      - name: Docker load
+        run: docker load < /tmp/share/docker-image.tar
+
+      - name: Login
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      -name: Push
+        run: docker push ximikboda/myapp:latest
+       
 
   
