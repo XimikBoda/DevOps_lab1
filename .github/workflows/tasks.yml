@@ -52,20 +52,20 @@ jobs:
     needs: build
     name: Docker deploy 
     steps:
-      - name: Retrieve saved Docker image
-        uses: actions/download-artifact@v2
-        with:
-          name: docker-artifact
-          path: /tmp/share/
+        - name: Retrieve saved Docker image
+          uses: actions/download-artifact@v2
+          with:
+            name: docker-artifact
+            path: /tmp/share/
 
-      - name: Docker load
-        run: docker load < /tmp/share/docker-image.tar
+        - name: Docker load
+          run: docker load < /tmp/share/docker-image.tar
 
-      - name: Login
-        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        - name: Login
+          run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-      -name: Push
-        run: docker push ximikboda/myapp:latest
+        -name: Push
+          run: docker push ximikboda/myapp:latest
        
 
   
