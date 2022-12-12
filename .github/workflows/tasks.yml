@@ -51,6 +51,7 @@ jobs:
   deploy:
     needs: build
     name: Docker deploy 
+    runs-on: ubuntu-latest
     steps:
         - name: Retrieve saved Docker image
           uses: actions/download-artifact@v2
