@@ -38,8 +38,9 @@ jobs:
           run: docker build . --file Dockerfile --tag ximikboda/myapp:latest
 
         - name: Save docker docker to temp directory
-          run: mkdir -p /tmp/share
-          run: docker save ximikboda/myapp:latest > /tmp/share/docker-image.tar
+          run: |
+            mkdir -p /tmp/share
+            docker save ximikboda/myapp:latest > /tmp/share/docker-image.tar
 
         - name: Temporarily save Docker image
           uses: actions/upload-artifact@v2
