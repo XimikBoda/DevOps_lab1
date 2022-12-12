@@ -1,4 +1,4 @@
-name: Lint
+name: Lint, build docker and push
 
 on: 
   pull_request:
@@ -27,3 +27,12 @@ jobs:
 
       - name: Code Linting
         run: npm run lint
+
+  build: 
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v1
+        - name: Build the latest Docker image
+          run: docker build . --file Dockerfile --tag ximikboda/myapp:latest
+
+  
